@@ -11,7 +11,7 @@ resources:
 variables:
 
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: '356d6e30-3e7b-458c-af4d-25e5dcc05cd7'
+  dockerRegistryServiceConnection: '117c0070-3e46-43e7-8565-11d4e15469e6'
   imageRepository: 'ksapplication'
   containerRegistry: 'myakscluster1'
   dockerfilePath: '**/Dockerfile'
