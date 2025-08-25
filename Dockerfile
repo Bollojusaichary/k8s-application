@@ -1,20 +1,27 @@
 FROM centos:centos7
 
-LABEL MAINTAINER=andrew.urwin@devopsgroup.com
+LABEL maintainer="andrew.urwin@devopsgroup.com"
 
-# Install Node etc...
-RUN yum -y update; yum clean all
-RUN yum -y install epel-release; yum clean all
-RUN yum -y install nodejs npm; yum clean all
+# Install Node.js and npm (from NodeSource repo for latest versions)
+RUN yum -y update && yum clean all && \
+    yum -y install curl epel-release && yum clean all && \
+    curl -sL https://rpm.nodesource.com/setup_14.x | bash - && \
+    yum -y install nodejs && yum clean all
 
-# Copy source code to /src in container
-COPY . /src
+# Set working directory inside container
+WORKDIR /src
 
-# Install app and dependencies into /src in container
-RUN cd /src; npm install
+# Copy package.json and package-lock.json first for better caching
+COPY package*.json ./
 
-# Document the port the app listens on
+# Install dependencies
+RUN npm install
+
+# Copy the rest of the application code
+COPY . .
+
+# Expose the port your app runs on
 EXPOSE 8888
 
-# Run this command (starts the app) when the container starts
-CMD cd /src && node ./app.js
+# Start the application
+CMD ["node", "app.js"]
