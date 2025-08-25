@@ -1,4 +1,4 @@
-FROM centos:centos7
+FROM almalinux:8
 
 LABEL maintainer="andrew.urwin@devopsgroup.com"
 
