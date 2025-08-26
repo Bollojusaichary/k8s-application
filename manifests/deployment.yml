@@ -1,7 +1,8 @@
 apiVersion : apps/v1
 kind: Deployment
 metadata:
-  name: ksapplication 
+  name: ksapplication
+  namespace: myakscluster-default
 spec:
   replicas: 1
   selector:
@@ -19,4 +20,5 @@ spec:
             - containerPort: 8888
       imagePullSecrets:
         - name: ghostauacr8f8b-auth
+
 
