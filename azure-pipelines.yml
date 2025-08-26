@@ -13,7 +13,10 @@ variables:
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: '117c0070-3e46-43e7-8565-11d4e15469e6'
   imageRepository: 'ksapplication'
+  containerRegistryType: 'Azure Container Registry'
   containerRegistry: 'myakscluster1'
+  azureContainerRegistry: 'myaksclusteracr720.azurecr.io'
+  azureSubscriptionEndpoint: 'myakscluster1'
   dockerfilePath: '**/Dockerfile'
   tag: '$(Build.BuildId)'
   imagePullSecret: 'ghostauacr8f8b-auth'
@@ -62,7 +65,9 @@ stages:
             displayName: Create imagePullSecret
             inputs:
               action: createSecret
-              secretName: $(imagePullSecret)
+              secretName: ghostauacr8f8b-auth
+              namespace: myakscluster-default
+              secretType: dockerRegistry
               dockerRegistryEndpoint: $(dockerRegistryServiceConnection)
               
           - task: KubernetesManifest@1
