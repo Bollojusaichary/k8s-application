@@ -4,7 +4,9 @@ metadata:
     name: ksapplication
 spec:
     type: LoadBalancer
-    ports:
-    - port: 8888 
     selector:
-        app: ksapplication
+      app: ksapplication
+    ports:
+      - protocol: TCP
+        port: 8888 
+        targetPort: 8888
