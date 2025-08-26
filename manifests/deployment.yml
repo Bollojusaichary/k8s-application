@@ -14,6 +14,7 @@ spec:
     spec:
       containers:
         - name: ksapplication 
-          image: ghostauacr.azurecr.io/ksapplication
+          image: myaksclusteracr720.azurecr.io/ksapplication
           ports:
+
           - containerPort: 8888
