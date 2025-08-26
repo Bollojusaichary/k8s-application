@@ -15,10 +15,11 @@ spec:
     spec:
       containers:
         - name: ksapplication 
-          image: myaksclusteracr720.azurecr.io/ksapplication:latest
+          image: myaksclusteracr720.azurecr.io/ksapplication:$(Build.BuildId)
           ports:
             - containerPort: 8888
       imagePullSecrets:
         - name: ghostauacr8f8b-auth
+
 
 
