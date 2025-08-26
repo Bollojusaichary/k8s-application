@@ -69,6 +69,20 @@ stages:
               namespace: myakscluster-default
               secretType: dockerRegistry
               dockerRegistryEndpoint: $(dockerRegistryServiceConnection)
+          
+          - task: Bash@3
+            inputs:
+              targetType: 'inline'
+              script: |
+                # Use envsubst to replace environment variables in your YAML file
+                # Make sure your YAML has the variable like: image: myacr.azurecr.io/myapp:$(Build.BuildId)
+                envsubst < your-deployment.yml > your-deployment-replaced.yml
+      
+                # Or use sed for a simpler replacement
+                # sed -i 's/$(Build.BuildId)/$(Build.BuildId)/g' your-deployment.yml
+                displayName: 'Replace Build ID in YAML'
+                env:
+                  Build_BuildId: $(Build.BuildId)
               
           - task: KubernetesManifest@1
             displayName: Deploy to Kubernetes cluster
