@@ -74,6 +74,7 @@ stages:
             displayName: Deploy to Kubernetes cluster
             inputs:
               action: deploy
+              namespace: myakscluster-default
               manifests: |
                 $(Pipeline.Workspace)/manifests/deployment.yml
                 $(Pipeline.Workspace)/manifests/service.yml
